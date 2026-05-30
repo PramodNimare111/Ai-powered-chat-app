@@ -18,6 +18,17 @@ const userSchema = new mongoose.Schema({
     profilePic : {
         type: String,
         default: ""
+    },
+    autoReply: {
+        isEnabled: {
+            type: Boolean,
+            default: false
+        },
+        message: {
+            type: String,
+            default: "Hey! I'm currently unavailable. I'll get back to you soon.",
+            maxlength: 300
+        }
     }
 }, {timestamps: true}); //it shows when the user is created and updated
 
