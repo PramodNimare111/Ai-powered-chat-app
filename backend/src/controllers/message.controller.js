@@ -46,14 +46,14 @@ export const sendMessage = async (req, res) => {
     if (senderId.equals(receiverId)) {
       return res.status(400).json({ message: "Cannot send messages to yourself." });
     }
-    const receiverExists = await User.exists({ _id: receiverId });
-    if (!receiverExists) {
+
+    const receiver = await User.findById(receiverId);
+    if (!receiver) {
       return res.status(404).json({ message: "Receiver not found." });
     }
 
     let imageUrl;
     if (image) {
-      // upload base64 image to cloudinary
       const uploadResponse = await cloudinary.uploader.upload(image);
       imageUrl = uploadResponse.secure_url;
     }
@@ -73,6 +73,30 @@ export const sendMessage = async (req, res) => {
     }
 
     res.status(201).json(newMessage);
+
+    // auto-reply: trigger only if receiver is offline and has auto-reply enabled
+    const isReceiverOnline = !!getReceiverSocketId(receiverId);
+    if (!isReceiverOnline && receiver.autoReply?.isEnabled && receiver.autoReply?.message) {
+      // small delay so it feels natural
+      setTimeout(async () => {
+        try {
+          const autoReplyMessage = new Message({
+            senderId: receiverId,
+            receiverId: senderId,
+            text: receiver.autoReply.message,
+          });
+          await autoReplyMessage.save();
+
+          // deliver to sender if they are online
+          const senderSocketId = getReceiverSocketId(senderId.toString());
+          if (senderSocketId) {
+            io.to(senderSocketId).emit("newMessage", autoReplyMessage);
+          }
+        } catch (err) {
+          console.log("Error sending auto-reply:", err.message);
+        }
+      }, 1500);
+    }
   } catch (error) {
     console.log("Error in sendMessage controller: ", error.message);
     res.status(500).json({ error: "Internal server error" });
@@ -83,7 +107,6 @@ export const getChatPartners = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
 
-    // find all the messages where the logged-in user is either sender or receiver
     const messages = await Message.find({
       $or: [{ senderId: loggedInUserId }, { receiverId: loggedInUserId }],
     });

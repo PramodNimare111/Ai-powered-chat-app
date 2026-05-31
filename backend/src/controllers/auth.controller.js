@@ -146,3 +146,26 @@ export const updateProfile = async (req, res) => {
         });
     }
 };
+
+export const updateAutoReply = async (req, res) => {
+    try {
+        const { isEnabled, message } = req.body;
+        const userId = req.user._id;
+
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            {
+                autoReply: {
+                    isEnabled: isEnabled ?? req.user.autoReply?.isEnabled,
+                    message: message ?? req.user.autoReply?.message,
+                },
+            },
+            { new: true }
+        ).select("-password");
+
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        console.log("Error in updateAutoReply:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};
