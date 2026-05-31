@@ -4,8 +4,10 @@ import {
   getChatPartners,
   getMessagesByUserId,
   sendMessage,
+  
 } from "../controllers/message.controller.js";
 import { protectRoute } from "../middleware/auth.middleware.js";
+import { getReplySuggestions } from "../controllers/suggestion.controller.js";
 import { arcjetProtection } from "../middleware/arcjet.middleware.js";
 
 const router = express.Router();
@@ -18,5 +20,6 @@ router.get("/contacts", getAllContacts);
 router.get("/chats", getChatPartners);
 router.get("/:id", getMessagesByUserId);
 router.post("/send/:id", sendMessage);
+router.post("/reply-suggestions", getReplySuggestions);
 
 export default router;
