@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { LogOutIcon, VolumeOffIcon, Volume2Icon } from "lucide-react";
 import useAuthStore from "../store/useAuthStore";
 import useChatStore from "../store/useChatStore";
+import AutoReplySettings from "./AutoReplySettings";
 
 const mouseClickSound = new Audio("/sounds/mouse-click.mp3");
 
@@ -67,6 +68,9 @@ function ProfileHeader() {
 
         {/* BUTTONS */}
         <div className="flex gap-4 items-center">
+          {/* AUTO REPLY SETTINGS BTN */}
+          <AutoReplySettings />
+
           {/* LOGOUT BTN */}
           <button
             className="text-slate-400 hover:text-slate-200 transition-colors"
@@ -79,8 +83,7 @@ function ProfileHeader() {
           <button
             className="text-slate-400 hover:text-slate-200 transition-colors"
             onClick={() => {
-              // play click sound before toggling
-              mouseClickSound.currentTime = 0; // reset to start
+              mouseClickSound.currentTime = 0;
               mouseClickSound.play().catch((error) => console.log("Audio play failed:", error));
               toggleSound();
             }}
@@ -96,4 +99,5 @@ function ProfileHeader() {
     </div>
   );
 }
+
 export default ProfileHeader;
