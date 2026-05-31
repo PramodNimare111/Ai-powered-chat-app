@@ -1,17 +1,28 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import useKeyboardSound from "../hooks/useKeyboardSound";
 import useChatStore from "../store/useChatStore";
 import toast from "react-hot-toast";
 import { ImageIcon, SendIcon, XIcon } from "lucide-react";
 
-function MessageInput() {
+function MessageInput({ prefillText, onPrefillConsumed }) {
   const { playRandomKeyStrokeSound } = useKeyboardSound();
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
 
   const fileInputRef = useRef(null);
+  const inputRef = useRef(null);
 
   const { sendMessage, isSoundEnabled } = useChatStore();
+
+  // when parent passes a suggestion, prefill the input and focus it
+  useEffect(() => {
+    if (prefillText) {
+      setText(prefillText);
+      onPrefillConsumed?.();
+      // focus so user can immediately edit or send
+      setTimeout(() => inputRef.current?.focus(), 0);
+    }
+  }, [prefillText, onPrefillConsumed]);
 
   const handleSendMessage = (e) => {
     e.preventDefault();
@@ -67,6 +78,7 @@ function MessageInput() {
 
       <form onSubmit={handleSendMessage} className="max-w-3xl mx-auto flex space-x-4">
         <input
+          ref={inputRef}
           type="text"
           value={text}
           onChange={(e) => {
@@ -105,4 +117,5 @@ function MessageInput() {
     </div>
   );
 }
+
 export default MessageInput;
