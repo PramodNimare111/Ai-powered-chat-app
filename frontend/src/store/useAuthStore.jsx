@@ -80,6 +80,23 @@ const useAuthStore = create((set, get) => ({
     }
   },
 
+  updateAutoReply: async (data) => {
+    try {
+      const res = await axiosInstance.put("/auth/update-auto-reply", data);
+      set({ authUser: res.data });
+      toast.success(
+        data.isEnabled !== undefined
+          ? data.isEnabled
+            ? "Auto-reply enabled"
+            : "Auto-reply disabled"
+          : "Auto-reply message saved"
+      );
+    } catch (error) {
+      console.log("Error in updateAutoReply:", error);
+      toast.error(error.response?.data?.message || "Something went wrong");
+    }
+  },
+
   connectSocket: () => {
     const { authUser } = get();
     if (!authUser || get().socket?.connected) return;
