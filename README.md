@@ -2,7 +2,7 @@
 
 <img src="frontend/public/logo.png" alt="Messenger Logo" width="100" />
 
-# 💬 Messenger — AI-Powered Chat App
+# AI-Powered Chat App
 
 A full-stack real-time messaging application with **AI-powered reply suggestions**, **auto-reply**, **image sharing**, and **live online presence** — built with React, Node.js, Socket.IO, and MongoDB.
 
@@ -17,7 +17,7 @@ A full-stack real-time messaging application with **AI-powered reply suggestions
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [About the Project](#-about-the-project)
 - [Screenshots](#-screenshots)
@@ -36,7 +36,7 @@ A full-stack real-time messaging application with **AI-powered reply suggestions
 
 ---
 
-## 🚀 About the Project
+## About the Project
 
 **Messenger** is a modern, full-stack real-time chat application that goes beyond basic messaging. It integrates an AI model (Groq's LLaMA 3) to suggest contextual replies based on your conversation, and features auto-reply for when you're offline — all wrapped in a sleek dark UI with ambient glow effects.
 
@@ -44,7 +44,7 @@ The app is production-ready: JWT authentication, Arcjet security middleware (bot
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 | Login Page | Sign Up Page |
 |---|---|
@@ -56,48 +56,48 @@ The app is production-ready: JWT authentication, Arcjet security middleware (bot
 
 ---
 
-## ✨ Features
+## Features
 
-### 💬 Real-Time Messaging
+### Real-Time Messaging
 - Instant message delivery using **Socket.IO** WebSockets
 - Online/offline presence indicators shown live across all connected clients
 - Optimistic UI — messages appear instantly before server confirmation
 
-### 🤖 AI-Powered Reply Suggestions
+### AI-Powered Reply Suggestions
 - Click the **✨ Suggest reply** button in any conversation
 - The app sends the last 20 messages as a transcript to the Groq LLaMA 3.1 model
 - Receive 3 short, context-aware reply suggestions as clickable chips
 - Select a suggestion to auto-fill the message input for quick editing and sending
 
-### 🔁 Auto-Reply
+### Auto-Reply
 - Enable an away message from the **Bot** icon in the chat header
 - When you're offline, anyone who messages you receives your custom auto-reply automatically
 - Fully customizable message (up to 300 characters) with a toggle on/off switch
 
-### 📷 Image Sharing
+### Image Sharing
 - Share images directly in chat — uploaded and stored via **Cloudinary**
 - Image preview before sending with the ability to remove the selection
 
-### 👤 User Profiles
+### User Profiles
 - Upload and update your profile picture (stored on Cloudinary)
 - View the profile picture and online status of your chat partner in the header
 
-### 🔐 Authentication
+### Authentication
 - Secure signup and login with **JWT** (stored in HTTP-only cookies)
 - Password hashing with **bcrypt**
 - Welcome email sent on signup via **Resend**
 
-### 🎵 Keyboard Sound Effects
+### Keyboard Sound Effects
 - Toggleable keystroke sound effects while typing (4 randomized sounds)
 - Notification sound for incoming messages
 
-### 🛡️ Security
+### Security
 - **Arcjet** middleware: shield (SQL injection / XSS protection), bot detection, and sliding window rate limiting (100 req/min)
 - All Socket.IO connections authenticated via JWT middleware
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 | Technology | Purpose |
@@ -127,7 +127,7 @@ The app is production-ready: JWT authentication, Arcjet security middleware (bot
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Ai-powered-chat-app/
@@ -184,7 +184,7 @@ Ai-powered-chat-app/
 
 ---
 
-## 🏁 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -296,7 +296,7 @@ npm start
 
 ---
 
-## 📡 API Endpoints
+## API Endpoints
 
 ### Auth — `/api/auth`
 
@@ -321,7 +321,7 @@ npm start
 
 ---
 
-## 🔒 Security
+## Security
 
 This app uses [Arcjet](https://arcjet.com/) to protect all API routes with three layers:
 
@@ -333,7 +333,7 @@ Both REST API routes and Socket.IO connections require a valid JWT. Tokens are s
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! To get started:
 
@@ -347,7 +347,7 @@ Please make sure your code follows the existing style and that the app runs with
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the **ISC License**. See the [LICENSE](LICENSE) file for details.
 
@@ -355,8 +355,8 @@ This project is licensed under the **ISC License**. See the [LICENSE](LICENSE) f
 
 <div align="center">
 
-Made with ❤️ by [Pramod Nimare](https://github.com/PramodNimare111)
+Made with by [Pramod Nimare](https://github.com/PramodNimare111)
 
-⭐ If you found this project useful, give it a star!
+ If you found this project useful, give it a star!
 
 </div>
