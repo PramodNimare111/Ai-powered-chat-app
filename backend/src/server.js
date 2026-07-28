@@ -13,9 +13,11 @@ const __dirname = path.resolve();
 
 const PORT = ENV.PORT || 3000;
 
+const allowedOrigin = ENV.NODE_ENV === "production" ? ENV.CLIENT_URL : "http://localhost:5173";
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigin,
     credentials: true,
   })
 );
